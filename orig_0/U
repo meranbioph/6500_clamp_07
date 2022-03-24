@@ -15,25 +15,15 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (5 0 0);
+internalField   uniform (0 0 0);
 
 boundaryField
 {
-  inlet
-  {
-      type         uniformFixedValue;
-      uniformValue
-      {
-          type             tableFile;
-          format           csv;
-          nHeaderLine      0;              // number of header lines
-          refColumn        0;              // time column index
-          componentColumns (1 2 3);            // data column index
-          separator        ";";            // optional (defaults to ",")
-          mergeSeparators  no;             // merge multiple separators
-          file             "data/UDataTable.csv";
-     }
-  }
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (5 0 0);
+    }
 
     outlet
     {

@@ -8,33 +8,23 @@
 FoamFile
 {
     format      ascii;
-    class       volVectorField;
-    object      U;
+    class       volScalarField;
+    location    "0";
+    object      epsilon;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 1 -1 0 0 0 0];
+dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform (5 0 0);
+internalField   uniform 14.855;
 
 boundaryField
 {
-  inlet
-  {
-      type         uniformFixedValue;
-      uniformValue
-      {
-          type             tableFile;
-          format           csv;
-          nHeaderLine      0;              // number of header lines
-          refColumn        0;              // time column index
-          componentColumns (1 2 3);            // data column index
-          separator        ";";            // optional (defaults to ",")
-          mergeSeparators  no;             // merge multiple separators
-          file             "data/UDataTable.csv";
-     }
-  }
-
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 14.855;
+    }
     outlet
     {
         type            zeroGradient;
@@ -44,16 +34,16 @@ boundaryField
     {
         type            symmetryPlane;
     }
-
     ground
     {
-        type            noSlip;
+        type            epsilonWallFunction;
+        value           uniform 14.855;
     }
-
     frontAndBack
     {
         type            empty;
     }
 }
+
 
 // ************************************************************************* //
